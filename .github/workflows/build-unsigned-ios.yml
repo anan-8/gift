@@ -37,8 +37,11 @@ jobs:
           cd ios
           pod install --repo-update
 
-      - name: Build iOS release (no codesign)
-        run: flutter build ios --release --no-codesign --no-simulator
+      - name: List ios/Flutter directory
+        run: ls -la ios/Flutter
+
+      - name: Build iOS release (no codesign, verbose)
+        run: flutter build ios --release --no-codesign --no-simulator --verbose
 
       - name: Package unsigned IPA
         run: |
