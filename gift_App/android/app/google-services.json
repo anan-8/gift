@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "283130328937",
+    "project_id": "gift-64824",
+    "storage_bucket": "gift-64824.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283130328937:android:71ca56d1df36d90d19eff8",
+        "android_client_info": {
+          "package_name": "com.example.gift"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5MToUDKpCK_Tmu-6yCc9rbfFe2AT4X-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
