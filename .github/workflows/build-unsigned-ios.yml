@@ -16,17 +16,13 @@ jobs:
         with:
           flutter-version: '3.32.5'
 
-      - name: Install dependencies
+      - name: Run flutter pub get
         run: flutter pub get
 
-      - name: Install CocoaPods
-        run: |
-          sudo gem install cocoapods --no-document || true
-          pod --version
-
       - name: Run pod install
-        working-directory: ios
-        run: pod install --repo-update
+        run: |
+          cd ios
+          pod install --repo-update
 
       - name: Build iOS release (no codesign)
         run: flutter build ios --release --no-codesign
