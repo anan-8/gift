@@ -2,16 +2,23 @@ platform :ios, '13.0'
 
 # Flutter-specific Podfile configuration
 def flutter_root
-  generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'))
+  generated_xcode_build_settings_path = File.expand_path(File.join(__dir__, 'Flutter', 'Generated.xcconfig'))
+  
   unless File.exist?(generated_xcode_build_settings_path)
-    raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
+    puts "Warning: #{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
+    # لا ترفع استثناء حتى لا يفشل الـ pod install في CI
   end
-  File.foreach(generated_xcode_build_settings_path) do |line|
-    if line =~ /FLUTTER_ROOT=/
-      return line.split('=').last.strip
+  
+  if File.exist?(generated_xcode_build_settings_path)
+    File.foreach(generated_xcode_build_settings_path) do |line|
+      if line =~ /FLUTTER_ROOT=/
+        return line.split('=').last.strip
+      end
     end
   end
-  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}"
+  
+  # إفتراضياً إرجاع متغير بيئي FLUTTER_ROOT إذا لم يعثر على السطر أعلاه
+  return ENV['FLUTTER_ROOT'] || raise("FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}")
 end
 
 require File.expand_path(File.join(flutter_root, 'packages', 'flutter_tools', 'bin', 'podhelper'))
