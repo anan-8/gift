@@ -16,8 +16,21 @@ jobs:
         with:
           flutter-version: '3.32.5'
 
+      - name: Clean Flutter project
+        run: flutter clean
+
       - name: Run flutter pub get
         run: flutter pub get
+
+      - name: Remove Pods and Podfile.lock
+        run: |
+          cd ios
+          rm -rf Pods Podfile.lock
+
+      - name: Install CocoaPods
+        run: |
+          sudo gem install cocoapods --no-document || true
+          pod --version
 
       - name: Run pod install
         run: |
@@ -25,7 +38,7 @@ jobs:
           pod install --repo-update
 
       - name: Build iOS release (no codesign)
-        run: flutter build ios --release --no-codesign
+        run: flutter build ios --release --no-codesign --no-simulator
 
       - name: Package unsigned IPA
         run: |
