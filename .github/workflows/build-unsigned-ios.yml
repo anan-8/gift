@@ -8,52 +8,47 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.32.5'
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.32.5'
 
-      - name: Clean Flutter project
-        run: flutter clean
+    - name: Flutter clean
+      run: flutter clean
 
-      - name: Run flutter pub get
-        run: flutter pub get
+    - name: Get Flutter dependencies
+      run: flutter pub get
 
-      - name: Remove Pods and Podfile.lock
-        run: |
-          cd ios
-          rm -rf Pods Podfile.lock
+    - name: Remove iOS Pods and Podfile.lock
+      run: |
+        cd ios
+        rm -rf Pods Podfile.lock
 
-      - name: Install CocoaPods
-        run: |
-          sudo gem install cocoapods --no-document || true
-          pod --version
+    - name: Install CocoaPods
+      run: |
+        sudo gem install cocoapods --no-document || true
+        pod --version
 
-      - name: Run pod install
-        run: |
-          cd ios
-          pod install --repo-update
+    - name: Run pod install
+      run: |
+        cd ios
+        pod install --repo-update
 
-      - name: List ios/Flutter directory
-        run: ls -la ios/Flutter
+    - name: Build iOS release (no codesign)
+      run: flutter build ios --release --no-codesign --no-simulator
 
-      - name: Build iOS release (no codesign, verbose)
-        run: flutter build ios --release --no-codesign --no-simulator --verbose
+    - name: Package unsigned IPA
+      run: |
+        mkdir -p build/ios/ipa/Payload
+        cp -R build/ios/iphoneos/Runner.app build/ios/ipa/Payload/
+        cd build/ios/ipa
+        zip -r MyApp-unsigned.ipa Payload
 
-      - name: Package unsigned IPA
-        run: |
-          APP_PATH="build/ios/iphoneos/Runner.app"
-          IPA_DIR="build/ios/ipa"
-          mkdir -p "$IPA_DIR/Payload"
-          cp -R "$APP_PATH" "$IPA_DIR/Payload/"
-          cd "$IPA_DIR"
-          zip -r "MyApp-unsigned.ipa" Payload
-
-      - name: Upload unsigned IPA artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: unsigned-ipa
-          path: build/ios/ipa/MyApp-unsigned.ipa
+    - name: Upload unsigned IPA artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: unsigned-ipa
+        path: build/ios/ipa/MyApp-unsigned.ipa
