@@ -8,7 +8,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout source
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Flutter
@@ -16,25 +16,40 @@ jobs:
         with:
           flutter-version: '3.32.5'
 
-      - name: Run flutter pub get
+      - name: Flutter clean
+        run: flutter clean
+
+      - name: Get Flutter dependencies
         run: flutter pub get
+
+      - name: Remove iOS Pods and Podfile.lock
+        run: |
+          cd ios
+          rm -rf Pods Podfile.lock
+          pod cache clean --all || true
+
+      - name: Install CocoaPods
+        run: |
+          sudo gem install cocoapods --no-document || true
+          pod --version
 
       - name: Run pod install
         run: |
           cd ios
           pod install --repo-update
 
+      - name: Build iOS for Simulator (build Flutter.framework)
+        run: flutter build ios --simulator
+
       - name: Build iOS release (no codesign)
-        run: flutter build ios --release --no-codesign
+        run: flutter build ios --release --no-codesign --no-simulator
 
       - name: Package unsigned IPA
         run: |
-          APP_PATH="build/ios/iphoneos/Runner.app"
-          IPA_DIR="build/ios/ipa"
-          mkdir -p "$IPA_DIR/Payload"
-          cp -R "$APP_PATH" "$IPA_DIR/Payload/"
-          cd "$IPA_DIR"
-          zip -r "MyApp-unsigned.ipa" Payload
+          mkdir -p build/ios/ipa/Payload
+          cp -R build/ios/iphoneos/Runner.app build/ios/ipa/Payload/
+          cd build/ios/ipa
+          zip -r MyApp-unsigned.ipa Payload
 
       - name: Upload unsigned IPA artifact
         uses: actions/upload-artifact@v4
