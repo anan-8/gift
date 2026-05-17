@@ -2,23 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-
-    <key>FacebookAppID</key>
-<string>1296408754691025</string>
-<key>FacebookClientToken</key>
-<string>5aed4f6f27a53b01f8ffccec62883b5c</string>
-<key>FacebookDisplayName</key>
-<string>gift</string>
-
+	<key>FacebookAppID</key>
+	<string>1296408754691025</string>
+	<key>FacebookClientToken</key>
+	<string>5aed4f6f27a53b01f8ffccec62883b5c</string>
+	<key>FacebookDisplayName</key>
+	<string>gift</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Vioné فيونيه</string>
-
-	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
-	<string>Gift</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -27,8 +20,6 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>Vioné فيونيه</string>
-
-	<string>gift</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
