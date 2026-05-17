@@ -25,19 +25,12 @@ jobs:
 
       - name: Create iPad Pro Simulator
         run: |
-          echo "=== Available Runtimes ==="
-          xcrun simctl list runtimes
-          echo "=== Available Device Types ==="
-          xcrun simctl list devicetypes | grep -i ipad
-
-          RUNTIME=$(xcrun simctl list runtimes | grep 'iOS' | tail -1 | awk '{print $NF}')
-          DEVICE=$(xcrun simctl list devicetypes | grep -i "ipad-pro" | tail -1 | awk -F'[()]' '{print $2}')
-
-          echo "Using runtime: $RUNTIME"
-          echo "Using device: $DEVICE"
+          RUNTIME="com.apple.CoreSimulator.SimRuntime.iOS-18-5"
+          DEVICE="com.apple.CoreSimulator.SimDeviceType.iPad-Pro-12-9-inch-6th-generation-8GB"
 
           UDID=$(xcrun simctl create "iPadPro" "$DEVICE" "$RUNTIME")
           echo "SIMULATOR_UDID=$UDID" >> $GITHUB_ENV
+          echo "✅ Created: $UDID"
 
       - name: Boot Simulator
         run: |
