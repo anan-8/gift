@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 import 'dart:async';
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gift/Search/main_layout.dart';
 import 'package:gift/signup_screen.dart';
-<<<<<<< HEAD
 import 'package:cloud_firestore/cloud_firestore.dart';
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,7 +14,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-<<<<<<< HEAD
   final _passwordController = TextEditingController();
   final _otpController = TextEditingController();
   final _phoneTextController = TextEditingController();
@@ -88,21 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-=======
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _rememberMe = false;
-  bool _isLoading = false;
-  bool _isResendingVerification = false;
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,7 +110,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
-<<<<<<< HEAD
 
                     // رسالة توضيحية
                     if (!_showOtpField)
@@ -275,48 +252,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: _isLoading
                           ? null
                           : (_showOtpField ? _verifyOtp : _loginWithPhone),
-=======
-                    _buildTextField(
-                      controller: _emailController,
-                      label: 'البريد الإلكتروني',
-                      icon: Icons.email,
-                    ),
-                    const SizedBox(height: 12),
-                    _buildTextField(
-                      controller: _passwordController,
-                      label: 'كلمة المرور',
-                      icon: Icons.lock,
-                      obscure: true,
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _rememberMe,
-                          onChanged: (value) =>
-                              setState(() => _rememberMe = value!),
-                          activeColor: Color(0xFF8B0000),
-                        ),
-                        const Text(
-                          'تذكرني',
-                          style: TextStyle(color: Colors.black87),
-                        ),
-                      ],
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                        onPressed: _resetPassword,
-                        child: Text(
-                          'نسيت كلمة المرور؟',
-                          style: TextStyle(color: Color(0xFF8B0000)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    ElevatedButton(
-                      onPressed: _isLoading ? null : _login,
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF8B0000),
                         minimumSize: const Size(double.infinity, 48),
@@ -326,15 +261,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       child: _isLoading
                           ? const CircularProgressIndicator(color: Colors.white)
-<<<<<<< HEAD
                           : Text(
                               _showOtpField ? 'تحقق من الرمز' : 'تسجيل الدخول',
                               style: const TextStyle(
-=======
-                          : const Text(
-                              'تسجيل الدخول',
-                              style: TextStyle(
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                                 fontSize: 16,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -342,7 +271,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                     ),
 
-<<<<<<< HEAD
                     // زر لتسجيل الدخول بكلمة المرور (بديل)
                     if (_showOtpField) ...[
                       const SizedBox(height: 16),
@@ -364,8 +292,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
 
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -400,7 +326,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-<<<<<<< HEAD
   // دالة لبناء حقل رقم الهاتف
   Widget _buildPhoneNumberField() {
     return Column(
@@ -713,17 +638,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   Widget _buildTextField({
     required TextEditingController controller,
     required String label,
     required IconData icon,
     bool obscure = false,
-<<<<<<< HEAD
     String? Function(String?)? validator,
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   }) {
     return TextFormField(
       controller: controller,
@@ -744,7 +664,6 @@ class _LoginScreenState extends State<LoginScreen> {
         filled: true,
         fillColor: Colors.grey[50],
       ),
-<<<<<<< HEAD
       validator: validator,
     );
   }
@@ -891,72 +810,10 @@ class _LoginScreenState extends State<LoginScreen> {
           _showOtpField = false;
           _otpController.clear();
         });
-=======
-      validator: (value) =>
-          value == null || value.isEmpty ? 'هذا الحقل مطلوب' : null,
-    );
-  }
-
-  void _resetPassword() async {
-    if (_emailController.text.trim().isEmpty) {
-      _showDialog(
-        'البريد الإلكتروني مطلوب',
-        'الرجاء إدخال البريد الإلكتروني لإعادة تعيين كلمة المرور.',
-      );
-      return;
-    }
-
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(
-        email: _emailController.text.trim(),
-      );
-      _showDialog(
-        'تم إرسال البريد',
-        'الرجاء التحقق من بريدك الإلكتروني لإعادة تعيين كلمة المرور.',
-      );
-    } catch (_) {
-      _showDialog(
-        'خطأ',
-        'فشل إرسال بريد إعادة التعيين. الرجاء المحاولة مرة أخرى.',
-      );
-    }
-  }
-
-  void _login() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-      try {
-        UserCredential userCredential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-              email: _emailController.text.trim(),
-              password: _passwordController.text.trim(),
-            );
-
-        User? user = FirebaseAuth.instance.currentUser;
-        await user?.reload();
-        if (user != null) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => MainLayout()),
-          );
-        }
-      } on FirebaseAuthException catch (e) {
-        final errorMessage = e.code == 'user-not-found'
-            ? 'البريد الإلكتروني غير موجود'
-            : e.code == 'wrong-password'
-            ? 'كلمة المرور خاطئة'
-            : 'فشل تسجيل الدخول';
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(errorMessage)));
-      } finally {
-        if (mounted) setState(() => _isLoading = false);
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       }
     }
   }
 
-<<<<<<< HEAD
   // ✅ دالة جديدة لمعالجة Timeout
   void _showTimeoutDialog() {
     if (!_isMounted()) return;
@@ -967,22 +824,10 @@ class _LoginScreenState extends State<LoginScreen> {
       builder: (dialogContext) => AlertDialog(
         title: Text(
           'لم يصلك الرمز؟',
-=======
-  Future<void> _showEmailNotVerifiedDialog(User? user) async {
-    bool shouldResend = false;
-
-    await showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) => AlertDialog(
-        title: Text(
-          'تفعيل البريد الإلكتروني مطلوب',
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
           style: TextStyle(color: Color(0xFF8B0000)),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
-<<<<<<< HEAD
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('لم نتمكن من إرسال رمز التحقق إلى رقم هاتفك.'),
@@ -995,22 +840,10 @@ class _LoginScreenState extends State<LoginScreen> {
             Text('• رقم الهاتف غير صحيح'),
             Text('• مشكلة في شبكة الاتصال'),
             Text('• محاولات كثيرة جداً'),
-=======
-          children: [
-            Text(
-              'تم إرسال رابط التفعيل إلى بريدك الإلكتروني. يرجى التحقق قبل تسجيل الدخول.',
-            ),
-            if (_isResendingVerification)
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: CircularProgressIndicator(),
-              ),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
           ],
         ),
         actions: [
           TextButton(
-<<<<<<< HEAD
             onPressed: () {
               Navigator.pop(dialogContext);
               // العودة لشاشة إدخال كلمة المرور
@@ -1033,32 +866,12 @@ class _LoginScreenState extends State<LoginScreen> {
             },
             style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF8B0000)),
             child: Text('إعادة المحاولة'),
-=======
-            onPressed: () => Navigator.pop(context),
-            child: Text('إغلاق', style: TextStyle(color: Color(0xFF8B0000))),
-          ),
-          TextButton(
-            onPressed: () async {
-              setState(() => _isResendingVerification = true);
-              await user?.sendEmailVerification();
-              setState(() => _isResendingVerification = false);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('تم إعادة إرسال رابط التفعيل بنجاح')),
-              );
-              Navigator.pop(context);
-            },
-            child: Text(
-              'إعادة إرسال',
-              style: TextStyle(color: Color(0xFF8B0000)),
-            ),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
           ),
         ],
       ),
     );
   }
 
-<<<<<<< HEAD
   // ✅ دالة لعرض Toast بسيط
   void _showToast(String message) {
     if (!_isMounted()) return;
@@ -1529,17 +1342,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               }
             },
-=======
-  void _showDialog(String title, String message) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text(title, style: TextStyle(color: Color(0xFF8B0000))),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
             child: Text('موافق', style: TextStyle(color: Color(0xFF8B0000))),
           ),
         ],

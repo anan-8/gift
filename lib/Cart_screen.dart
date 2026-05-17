@@ -5,14 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-<<<<<<< HEAD
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 
 class CartScreen extends StatefulWidget {
   @override
@@ -35,10 +32,7 @@ class _CartScreenState extends State<CartScreen> {
           title: Text('سلة التسوق', style: TextStyle(color: Colors.white)),
           backgroundColor: Color(0xFF8B0000),
           iconTheme: IconThemeData(color: Colors.white),
-<<<<<<< HEAD
           centerTitle: true,
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
         ),
         body: Container(
           decoration: BoxDecoration(
@@ -56,7 +50,6 @@ class _CartScreenState extends State<CartScreen> {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-<<<<<<< HEAD
                 return _buildErrorWidget('حدث خطأ في تحميل السلة');
               }
 
@@ -66,66 +59,14 @@ class _CartScreenState extends State<CartScreen> {
 
               if (snapshot.data?.docs.isEmpty ?? true) {
                 return _buildEmptyCartWidget();
-=======
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.error_outline, color: Colors.red, size: 50),
-                      SizedBox(height: 16),
-                      Text(
-                        'حدث خطأ في تحميل السلة',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () => setState(() {}),
-                        child: Text('إعادة المحاولة'),
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 16),
-                      Text('جاري تحميل محتويات السلة...'),
-                    ],
-                  ),
-                );
-              }
-
-              if (snapshot.data?.docs.isEmpty ?? true) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.shopping_cart_outlined,
-                        size: 50,
-                        color: Colors.grey,
-                      ),
-                    ],
-                  ),
-                );
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
               }
 
               _totalPrice = 0;
               snapshot.data?.docs.forEach((doc) {
                 final data = doc.data() as Map<String, dynamic>;
                 final price = num.tryParse(data['price'].toString()) ?? 0;
-<<<<<<< HEAD
                 final int quantity =
                     (num.tryParse(data['quantity'].toString()) ?? 1).toInt();
-=======
-                final quantity = num.tryParse(data['quantity'].toString()) ?? 1;
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                 _totalPrice += price * quantity;
               });
 
@@ -153,7 +94,6 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-<<<<<<< HEAD
   Widget _buildErrorWidget(String message) {
     return Center(
       child: Column(
@@ -235,18 +175,10 @@ class _CartScreenState extends State<CartScreen> {
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-=======
-  Widget _buildCartItem(String docId, Map<String, dynamic> data) {
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       child: Padding(
         padding: EdgeInsets.all(12),
         child: Row(
           children: [
-<<<<<<< HEAD
             // صورة المنتج
             Container(
               width: 90,
@@ -292,35 +224,6 @@ class _CartScreenState extends State<CartScreen> {
             SizedBox(width: 16),
 
             // تفاصيل المنتج
-=======
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child:
-                  data['imageUrl'] != null &&
-                      data['imageUrl'].toString().isNotEmpty
-                  ? CachedNetworkImage(
-                      imageUrl: data['imageUrl'],
-                      width: 80,
-                      height: 80,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        color: Colors.grey[200],
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        color: Colors.grey[200],
-                        child: Icon(Icons.image, color: Colors.grey),
-                      ),
-                    )
-                  : Container(
-                      width: 80,
-                      height: 80,
-                      color: Colors.grey[200],
-                      child: Icon(Icons.image, color: Colors.grey),
-                    ),
-            ),
-            SizedBox(width: 16),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -330,16 +233,11 @@ class _CartScreenState extends State<CartScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-<<<<<<< HEAD
                       color: Colors.black87,
-=======
-                      color: Color(0xFF8B0000),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-<<<<<<< HEAD
                   SizedBox(height: 6),
                   Text(
                     '${price.toStringAsFixed(2)} ريال',
@@ -401,48 +299,15 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                       ],
                     ),
-=======
-                  SizedBox(height: 8),
-                  Text(
-                    '${data['price']?.toString() ?? '0'} ريال',
-                    style: TextStyle(fontSize: 14, color: Color(0xFF8B0000)),
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.remove, size: 20),
-                        onPressed: () =>
-                            _updateQuantity(docId, data['quantity'] - 1),
-                      ),
-                      Container(
-                        width: 30,
-                        alignment: Alignment.center,
-                        child: Text('${data['quantity'] ?? 1}'),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.add, size: 20),
-                        onPressed: () =>
-                            _updateQuantity(docId, data['quantity'] + 1),
-                      ),
-                    ],
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                   ),
                 ],
               ),
             ),
-<<<<<<< HEAD
 
             // زر الحذف
             IconButton(
               icon: Icon(Icons.delete_outline, color: Colors.red),
               onPressed: () => _showDeleteDialog(docId),
-=======
-            IconButton(
-              icon: Icon(Icons.delete, color: Colors.red),
-              onPressed: () => _removeFromCart(docId),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
             ),
           ],
         ),
@@ -451,7 +316,6 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   Widget _buildTotalCard(double total) {
-<<<<<<< HEAD
     return Container(
       margin: EdgeInsets.all(16),
       padding: EdgeInsets.all(20),
@@ -495,35 +359,6 @@ class _CartScreenState extends State<CartScreen> {
             size: 30,
           ),
         ],
-=======
-    return Card(
-      margin: EdgeInsets.all(16),
-      color: Color(0xFF8B0000),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'المجموع الكلي:',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              '${total.toStringAsFixed(2)} ريال',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       ),
     );
   }
@@ -536,7 +371,6 @@ class _CartScreenState extends State<CartScreen> {
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: SizedBox(
         width: double.infinity,
-<<<<<<< HEAD
         height: 56,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -568,31 +402,12 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                   ],
-=======
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFF8B0000),
-            padding: EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          onPressed: _isProcessingOrder
-              ? null
-              : () => _confirmOrder(context, cartItems),
-          child: _isProcessingOrder
-              ? CircularProgressIndicator(color: Colors.white)
-              : Text(
-                  'تأكيد الطلب والمتابعة للدفع',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                 ),
         ),
       ),
     );
   }
 
-<<<<<<< HEAD
   void _showDeleteDialog(String docId) {
     showDialog(
       context: context,
@@ -629,32 +444,17 @@ class _CartScreenState extends State<CartScreen> {
 
   // ✅ دالة جديدة للتنقل فقط - بدون إنشاء طلب
   Future<void> _navigateToCheckout(
-=======
-  Future<void> _confirmOrder(
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     BuildContext context,
     List<QueryDocumentSnapshot> cartItems,
   ) async {
     final user = _auth.currentUser;
     if (user == null) {
-<<<<<<< HEAD
       _showToast('يجب تسجيل الدخول أولاً');
-=======
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('يجب تسجيل الدخول أولاً')));
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       return;
     }
 
     if (cartItems.isEmpty) {
-<<<<<<< HEAD
       _showToast('السلة فارغة');
-=======
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('السلة فارغة')));
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       return;
     }
 
@@ -666,18 +466,10 @@ class _CartScreenState extends State<CartScreen> {
         throw 'لا يوجد اتصال بالإنترنت';
       }
 
-<<<<<<< HEAD
       // تجهيز بيانات الطلب مؤقتاً (بدون حفظ في Firestore)
       final orderData = {
         'userId': user.uid,
         'totalPrice': _totalPrice,
-=======
-      final orderData = {
-        'userId': user.uid,
-        'totalPrice': _totalPrice,
-        'status': 'جديدة',
-        'createdAt': FieldValue.serverTimestamp(),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
         'items': cartItems.map((doc) {
           final data = doc.data() as Map<String, dynamic>;
           return {
@@ -690,40 +482,19 @@ class _CartScreenState extends State<CartScreen> {
         }).toList(),
       };
 
-<<<<<<< HEAD
       // ✅ التنقل فقط إلى CheckoutScreen - بدون إنشاء طلب في Firestore
-=======
-      final orderRef = await _firestore.collection('orders').add(orderData);
-
-      final batch = _firestore.batch();
-      for (var item in cartItems) {
-        batch.delete(item.reference);
-      }
-      await batch.commit();
-
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => CheckoutScreen(
-<<<<<<< HEAD
             cartItems: cartItems, // تمرير عناصر السلة
-=======
-            orderId: orderRef.id,
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
             totalAmount: _totalPrice,
             orderData: orderData,
           ),
         ),
       );
     } catch (e) {
-<<<<<<< HEAD
       _showToast('حدث خطأ: ${e.toString()}');
-=======
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('حدث خطأ: ${e.toString()}')));
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     } finally {
       if (mounted) {
         setState(() => _isProcessingOrder = false);
@@ -743,49 +514,28 @@ class _CartScreenState extends State<CartScreen> {
         'updatedAt': FieldValue.serverTimestamp(),
       });
     } catch (e) {
-<<<<<<< HEAD
       _showToast('حدث خطأ أثناء تحديث الكمية');
-=======
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء تحديث الكمية')));
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     }
   }
 
   Future<void> _removeFromCart(String docId) async {
     try {
       await _firestore.collection('cart').doc(docId).delete();
-<<<<<<< HEAD
       _showToast('تم حذف المنتج من السلة');
     } catch (e) {
       _showToast('حدث خطأ أثناء الحذف من السلة');
-=======
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء الحذف من السلة')));
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     }
   }
 }
 
 class CheckoutScreen extends StatefulWidget {
-<<<<<<< HEAD
   final List<QueryDocumentSnapshot> cartItems; // أضف هذا
-=======
-  final String orderId;
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   final double totalAmount;
   final Map<String, dynamic> orderData;
 
   const CheckoutScreen({
     Key? key,
-<<<<<<< HEAD
     required this.cartItems, // أضف هذا
-=======
-    required this.orderId,
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     required this.totalAmount,
     required this.orderData,
   }) : super(key: key);
@@ -803,7 +553,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Position? _currentPosition;
   String _currentAddress = "";
   bool _isSubmitting = false;
-<<<<<<< HEAD
   String? _selectedPaymentMethod;
 
   // إضافة متغيرات لاختيار الدولة
@@ -885,8 +634,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       _phoneController.text = user.phoneNumber!;
     }
   }
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 
   Future<void> _getCurrentLocation() async {
     if (!mounted) return;
@@ -920,7 +667,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         position.longitude,
       );
 
-<<<<<<< HEAD
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks[0];
         String address = _formatAddress(place);
@@ -938,35 +684,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
           _showToast('تم تحديد موقعك بنجاح');
         }
-=======
-      Placemark place = placemarks[0];
-      String address =
-          '${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.country}';
-
-      if (mounted) {
-        setState(() {
-          _currentPosition = position;
-          _currentAddress = address;
-          _locationController.text = address;
-          _isGettingLocation = false;
-        });
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       }
     } catch (e) {
       if (mounted) {
         setState(() => _isGettingLocation = false);
-<<<<<<< HEAD
         _showToast('خطأ في الموقع: $e');
-=======
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('خطأ في الموقع: $e')));
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       }
     }
   }
 
-<<<<<<< HEAD
   // دالة لاكتشاف البلد من الإحداثيات
   Future<void> _detectCountryFromCoordinates(Placemark place) async {
     try {
@@ -1133,8 +859,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   @override
   void dispose() {
     _nameController.dispose();
@@ -1152,10 +876,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           title: Text('إتمام الدفع', style: TextStyle(color: Colors.white)),
           backgroundColor: Color(0xFF8B0000),
           iconTheme: IconThemeData(color: Colors.white),
-<<<<<<< HEAD
           centerTitle: true,
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(16),
@@ -1164,7 +885,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-<<<<<<< HEAD
                 // ملخص الطلب
                 _buildOrderSummary(),
                 SizedBox(height: 24),
@@ -1179,128 +899,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
                 // زر التأكيد
                 _buildConfirmButton(),
-=======
-                Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'رقم الطلب: ${widget.orderId}',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'المبلغ الإجمالي: ${widget.totalAmount.toStringAsFixed(2)} ريال',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF8B0000),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 24),
-
-                Text(
-                  'معلومات العميل:',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 16),
-
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: 'الاسم الكامل',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'الرجاء إدخال الاسم';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 16),
-
-                TextFormField(
-                  controller: _phoneController,
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                    labelText: 'رقم الهاتف',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.phone),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'الرجاء إدخال رقم الهاتف';
-                    }
-                    if (value.length < 10) {
-                      return 'يجب أن يحتوي رقم الهاتف على 10 أرقام على الأقل';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 16),
-
-                TextFormField(
-                  controller: _locationController,
-                  decoration: InputDecoration(
-                    labelText: 'العنوان / الموقع',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.location_on),
-                    suffixIcon: IconButton(
-                      icon: _isGettingLocation
-                          ? SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : Icon(Icons.my_location),
-                      onPressed: _getCurrentLocation,
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'الرجاء إدخال العنوان';
-                    }
-                    return null;
-                  },
-                ),
-                if (_currentPosition != null) ...[
-                  SizedBox(height: 8),
-                  Text(
-                    'الإحداثيات: ${_currentPosition!.latitude.toStringAsFixed(4)}, ${_currentPosition!.longitude.toStringAsFixed(4)}',
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
-                ],
-                SizedBox(height: 32),
-
-                Text(
-                  'اختر طريقة الدفع:',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 16),
-                _buildPaymentMethod(
-                  context,
-                  'الدفع عند الاستلام',
-                  Icons.money,
-                  () => _completeOrder(context, 'الدفع عند الاستلام'),
-                ),
-                _buildPaymentMethod(
-                  context,
-                  'بطاقة ائتمان',
-                  Icons.credit_card,
-                  () => _completeOrder(context, 'بطاقة ائتمان'),
-                ),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
               ],
             ),
           ),
@@ -1309,7 +907,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-<<<<<<< HEAD
   Widget _buildOrderSummary() {
     return Card(
       elevation: 3,
@@ -1373,31 +970,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
           ],
         ),
-=======
-  Widget _buildPaymentMethod(
-    BuildContext context,
-    String title,
-    IconData icon,
-    VoidCallback onPressed,
-  ) {
-    if (title == 'بطاقة ائتمان') return SizedBox(); // إخفاء خيار بطاقة ائتمان
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 8),
-      child: ListTile(
-        leading: Icon(icon, color: Color(0xFF8B0000)),
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-        trailing: Icon(Icons.arrow_forward_ios, size: 16),
-        onTap: () {
-          if (_formKey.currentState!.validate()) {
-            onPressed();
-          }
-        },
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       ),
     );
   }
 
-<<<<<<< HEAD
   Widget _buildCustomerInfo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1744,14 +1320,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       );
       return;
     }
-=======
-  Future<void> _completeOrder(
-    BuildContext context,
-    String paymentMethod,
-  ) async {
-    if (_isSubmitting) return;
-    if (!_formKey.currentState!.validate()) return;
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 
     setState(() => _isSubmitting = true);
 
@@ -1761,7 +1329,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         throw 'لا يوجد اتصال بالإنترنت';
       }
 
-<<<<<<< HEAD
       // ✅ حساب العمولة (24%)
       const double platformFeePercentage = 0.24; // 24%
       final double platformFee = widget.totalAmount * platformFeePercentage;
@@ -1826,14 +1393,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           'country': _selectedCountry,
           'countryName': countryName,
           'address': address,
-=======
-      Map<String, dynamic> updatedData = {
-        ...widget.orderData,
-        'customerInfo': {
-          'name': _nameController.text,
-          'phone': _phoneController.text,
-          'address': _locationController.text,
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
           'coordinates': _currentPosition != null
               ? {
                   'latitude': _currentPosition!.latitude,
@@ -1841,7 +1400,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 }
               : null,
         },
-<<<<<<< HEAD
         'paymentMethod': _selectedPaymentMethod == 'cash'
             ? 'الدفع عند الاستلام'
             : 'بطاقة ائتمان',
@@ -2541,66 +2099,4 @@ class _TelrPaymentScreenState extends State<TelrPaymentScreen> {
     print('🗑️ TelrPaymentScreen disposed');
     super.dispose();
   }
-=======
-        'paymentMethod': paymentMethod,
-        'status': 'جديدة',
-        'updatedAt': FieldValue.serverTimestamp(),
-      };
-
-      // إذا كانت طريقة الدفع "الدفع عند الاستلام" نضيف بيانات المنتجات
-      if (paymentMethod == 'الدفع عند الاستلام') {
-        final List<Map<String, dynamic>> enrichedItems = [];
-
-        for (var item in widget.orderData['items']) {
-          final productDoc = await FirebaseFirestore.instance
-              .collection('products')
-              .doc(item['productId'])
-              .get();
-
-          final productData = productDoc.data();
-
-          if (productData != null) {
-            enrichedItems.add({
-              ...item,
-              'createdAt': productData['createdAt'],
-              'description': productData['description'],
-              'imageUrl': productData['imageUrl'],
-              'latitude': productData['latitude'],
-              'longitude': productData['longitude'],
-              'storeId': productData['storeId'],
-              'storeName': productData['storeName'],
-              'storeNumber': productData['storeNumber'],
-            });
-          } else {
-            enrichedItems.add(item);
-          }
-        }
-
-        updatedData['items'] = enrichedItems;
-      }
-
-      await FirebaseFirestore.instance
-          .collection('orders')
-          .doc(widget.orderId)
-          .set(updatedData, SetOptions(merge: true));
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('تم تأكيد الطلب بنجاح'),
-          duration: Duration(seconds: 3),
-        ),
-      );
-
-      Navigator.popUntil(context, (route) => route.isFirst);
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('حدث خطأ: $e')));
-    } finally {
-      if (mounted) {
-        setState(() => _isSubmitting = false);
-      }
-    }
-  }
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 }

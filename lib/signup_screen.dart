@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 import 'dart:async';
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gift/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-<<<<<<< HEAD
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -21,7 +15,6 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
-<<<<<<< HEAD
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _otpController = TextEditingController();
@@ -70,33 +63,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
     'DJ', // جيبوتي
     'KM', // جزر القمر
   ];
-=======
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-  bool _acceptTerms = false;
-  bool _isLoading = false;
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 
   @override
   void dispose() {
     _nameController.dispose();
-<<<<<<< HEAD
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     _otpController.dispose();
     _phoneTextController.dispose(); // أضف هذا
-=======
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     super.dispose();
   }
 
   Future<void> _signUp() async {
     if (_formKey.currentState!.validate()) {
-<<<<<<< HEAD
       // التحقق من إدخال رقم الهاتف باستخدام عدة طرق
       bool hasValidPhone = false;
 
@@ -162,65 +141,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       } catch (e) {
         setState(() => _isLoading = false);
         _showErrorDialog('حدث خطأ غير متوقع: $e');
-=======
-      setState(() => _isLoading = true);
-      try {
-        // 1. إنشاء الحساب
-        UserCredential userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-              email: _emailController.text.trim(),
-              password: _passwordController.text.trim(),
-            );
-
-        // 2. تحديث اسم المستخدم
-        await userCredential.user!.updateDisplayName(
-          _nameController.text.trim(),
-        );
-
-        // 3. إعادة تحميل بيانات المستخدم للحصول على أحدث التحديثات
-        await userCredential.user!.reload();
-
-        // 4. الحصول على بيانات المستخدم المحدثة
-        final updatedUser = FirebaseAuth.instance.currentUser;
-
-        // 5. إرسال بريد التحقق
-        await updatedUser!.sendEmailVerification();
-
-        // 6. حفظ بيانات المستخدم في Firestore
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(updatedUser.uid)
-            .set({
-              'uid': updatedUser.uid,
-              'email': updatedUser.email,
-              'name': _nameController.text.trim(),
-              'role': 'client', // ← حدد نوع المستخدم هنا
-              'createdAt': FieldValue.serverTimestamp(),
-            });
-
-        // 7. عرض رسالة النجاح
-        _showSuccessDialog(
-          context,
-          updatedUser.displayName ?? _nameController.text.trim(),
-          updatedUser.email ?? _emailController.text.trim(),
-        );
-
-        // 6. عرض رسالة النجاح مع بيانات المستخدم المحدثة
-        _showSuccessDialog(
-          context,
-          updatedUser.displayName ?? _nameController.text.trim(),
-          updatedUser.email ?? _emailController.text.trim(),
-        );
-      } on FirebaseAuthException catch (e) {
-        _handleSignUpError(context, e);
-      } finally {
-        if (mounted) setState(() => _isLoading = false);
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       }
     }
   }
 
-<<<<<<< HEAD
   Future<void> _verifyOtp() async {
     if (_verificationId == null || _otpController.text.isEmpty) {
       _showErrorDialog('الرجاء إدخال رمز التحقق');
@@ -361,24 +285,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         break;
       case 'too-many-requests':
         errorMessage = 'طلبات كثيرة جداً، حاول لاحقاً';
-=======
-  void _handleSignUpError(BuildContext context, FirebaseAuthException e) {
-    String errorMessage;
-    switch (e.code) {
-      case 'email-already-in-use':
-        errorMessage = 'البريد الإلكتروني مستخدم بالفعل';
-        break;
-      case 'weak-password':
-        errorMessage = 'كلمة المرور ضعيفة جداً';
-        break;
-      case 'invalid-email':
-        errorMessage = 'بريد إلكتروني غير صالح';
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
         break;
       default:
         errorMessage = 'حدث خطأ أثناء إنشاء الحساب: ${e.message}';
     }
-<<<<<<< HEAD
     _showErrorDialog(errorMessage);
   }
 
@@ -389,14 +299,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _showSuccessDialog(BuildContext context, String name, String phone) {
-=======
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(errorMessage), backgroundColor: Colors.red),
-    );
-  }
-
-  void _showSuccessDialog(BuildContext context, String name, String email) {
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -407,7 +309,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             const Icon(Icons.check_circle, color: Colors.green, size: 60),
             const SizedBox(height: 16),
-<<<<<<< HEAD
             _buildUserInfoRow('الاسم:', name),
             _buildUserInfoRow('رقم الهاتف:', phone),
             _buildUserInfoRow(
@@ -419,32 +320,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
               'تم التحقق من رقم هاتفك بنجاح',
               style: TextStyle(color: Colors.green),
             ),
-=======
-            const Text('تم إرسال رابط التحقق إلى بريدك الإلكتروني'),
-            const SizedBox(height: 16),
-            _buildUserInfoRow('الاسم:', name),
-            _buildUserInfoRow('البريد:', email),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
           ],
         ),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-<<<<<<< HEAD
               _navigateToHome();
             },
             child: const Text(
               'متابعة',
-=======
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => LoginScreen()),
-              );
-            },
-            child: const Text(
-              'انتقل إلى تسجيل الدخول',
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
               style: TextStyle(color: Color(0xFF8B0000)),
             ),
           ),
@@ -453,7 +338,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-<<<<<<< HEAD
   void _navigateToHome() {
     Navigator.pushReplacement(
       context,
@@ -461,8 +345,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   Widget _buildUserInfoRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -478,7 +360,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-<<<<<<< HEAD
   // دالة لبناء حقل رقم الهاتف الدولي (الدول العربية فقط)
   Widget _buildPhoneNumberField() {
     return InternationalPhoneNumberInput(
@@ -564,8 +445,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -584,10 +463,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: const EdgeInsets.all(20.0),
               child: Form(
                 key: _formKey,
-<<<<<<< HEAD
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                 child: Column(
                   children: [
                     const Text(
@@ -600,7 +476,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 20),
 
-<<<<<<< HEAD
                     // رسالة توضيحية
                     Container(
                       padding: EdgeInsets.all(12),
@@ -629,8 +504,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 16),
 
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                     _buildTextField(
                       controller: _nameController,
                       label: 'الاسم الكامل',
@@ -644,7 +517,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 12),
 
-<<<<<<< HEAD
                     // حقل رقم الهاتف الدولي (الدول العربية فقط)
                     _buildPhoneNumberField(),
                     const SizedBox(height: 12),
@@ -693,25 +565,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ],
                     ),
-=======
-                    _buildTextField(
-                      controller: _emailController,
-                      label: 'البريد الإلكتروني',
-                      icon: Icons.email,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'يجب إدخال البريد الإلكتروني';
-                        }
-                        if (!RegExp(
-                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                        ).hasMatch(value)) {
-                          return 'بريد إلكتروني غير صالح';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 12),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 
                     _buildTextField(
                       controller: _passwordController,
@@ -769,13 +622,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 12),
 
                     ElevatedButton(
-<<<<<<< HEAD
                       onPressed: _isLoading || !_acceptTerms
                           ? null
                           : (_showOtpField ? _verifyOtp : _signUp),
-=======
-                      onPressed: _isLoading || !_acceptTerms ? null : _signUp,
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF8B0000),
                         minimumSize: const Size(double.infinity, 48),
@@ -785,15 +634,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       child: _isLoading
                           ? const CircularProgressIndicator(color: Colors.white)
-<<<<<<< HEAD
                           : Text(
                               _showOtpField ? 'تحقق من الرمز' : 'إنشاء حساب',
                               style: const TextStyle(
-=======
-                          : const Text(
-                              'إنشاء حساب',
-                              style: TextStyle(
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                                 fontSize: 16,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -824,19 +667,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     required String label,
     required IconData icon,
     bool obscure = false,
-<<<<<<< HEAD
     TextInputType keyboardType = TextInputType.text,
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     String? Function(String?)? validator,
   }) {
     return TextFormField(
       controller: controller,
       obscureText: obscure,
-<<<<<<< HEAD
       keyboardType: keyboardType,
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
       style: const TextStyle(color: Colors.black87),
       decoration: InputDecoration(
         labelText: label,

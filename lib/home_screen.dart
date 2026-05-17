@@ -176,12 +176,8 @@ class _GiftShopHomeScreenState extends State<GiftShopHomeScreen> {
                       darkRed: darkRed,
                       white: white,
                       onAddToCart: () => _addToCart(data, product.id),
-<<<<<<< HEAD
                       onViewDetails: () =>
                           _showProductDetails(context, data, product.id),
-=======
-                      onViewDetails: () => _showProductDetails(context, data),
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                     );
                   },
                 ),
@@ -194,15 +190,11 @@ class _GiftShopHomeScreenState extends State<GiftShopHomeScreen> {
     );
   }
 
-<<<<<<< HEAD
   void _showProductDetails(
     BuildContext context,
     Map<String, dynamic> product,
     String productId,
   ) {
-=======
-  void _showProductDetails(BuildContext context, Map<String, dynamic> product) {
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     final dateFormat = DateFormat('yyyy-MM-dd HH:mm');
     final createdAt = product['createdAt']?.toDate() ?? DateTime.now();
 
@@ -231,11 +223,7 @@ class _GiftShopHomeScreenState extends State<GiftShopHomeScreen> {
                 ),
               SizedBox(height: 16),
               Text(
-<<<<<<< HEAD
                 'السعر: ${product['price']?.toString() ?? '0'} ريال',
-=======
-                'السعر: ${product['price']?.toString() ?? '0'}ريال',
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                 style: TextStyle(fontSize: 16),
               ),
               SizedBox(height: 8),
@@ -266,11 +254,7 @@ class _GiftShopHomeScreenState extends State<GiftShopHomeScreen> {
           ),
           TextButton(
             onPressed: () {
-<<<<<<< HEAD
               _addToCart(product, productId);
-=======
-              _addToCart(product, '');
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
               Navigator.pop(context);
             },
             child: Text('إضافة إلى السلة', style: TextStyle(color: darkRed)),
@@ -433,11 +417,7 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-<<<<<<< HEAD
                           '$productPrice ريال',
-=======
-                          '$productPriceريال',
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
