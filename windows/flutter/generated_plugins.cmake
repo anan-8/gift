@@ -9,7 +9,10 @@ list(APPEND FLUTTER_PLUGIN_LIST
   firebase_auth
   firebase_core
   firebase_storage
+<<<<<<< HEAD
   flutter_inappwebview_windows
+=======
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   geolocator_windows
   permission_handler_windows
 )

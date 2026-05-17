@@ -2,7 +2,11 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
+<<<<<<< HEAD
     id("com.google.gms.google-services") 
+=======
+    id("com.google.gms.google-services") // ✅ لتفعيل Firebase
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 }
 
 android {
@@ -12,7 +16,11 @@ android {
 
     defaultConfig {
         applicationId = "com.example.gift"
+<<<<<<< HEAD
         minSdk = flutter.minSdkVersion
+=======
+        minSdk = 23
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName

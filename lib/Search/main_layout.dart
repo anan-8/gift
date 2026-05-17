@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:gift/B2BGifts.dart';
+=======
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 import 'package:gift/Cart_screen.dart';
 import 'package:gift/My_Orders_Screen.dart';
 import 'package:gift/User_Settings_Screen.dart';
@@ -15,12 +18,18 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int currentIndex = 0;
 
+<<<<<<< HEAD
   // ✅ إضافة صفحة B2B إلى قائمة الصفحات
+=======
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   final List<Widget> pages = [
     GiftShopHomeScreen(),
     MyOrdersScreen(),
     CartScreen(),
+<<<<<<< HEAD
     B2BGiftsScreen(), // ✅ صفحة B2B (الترتيب الرابع)
+=======
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     UserSettingsScreen(isLoggedIn: FirebaseAuth.instance.currentUser != null),
   ];
 
@@ -47,12 +56,15 @@ class _MainLayoutState extends State<MainLayout> {
             title: Text("السلة", style: TextStyle(fontSize: 12)),
             selectedColor: Colors.green,
           ),
+<<<<<<< HEAD
           // ✅ عنصر B2B الجديد
           SalomonBottomBarItem(
             icon: Icon(Icons.business, size: 24), // أيقونة الشركات
             title: Text("للشركات", style: TextStyle(fontSize: 12)),
             selectedColor: Colors.orange, // لون برتقالي مميز
           ),
+=======
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
           SalomonBottomBarItem(
             icon: Icon(Icons.settings, size: 24),
             title: Text("الإعدادات", style: TextStyle(fontSize: 12)),

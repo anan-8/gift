@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 plugins {
     id("com.android.application") version "8.9.1" apply false
+=======
+// ✅ إضافة Google Services Plugin (مع تطبيقه false لأنه سيُستخدم في app-level)
+plugins {
+    id("com.android.application") version "8.7.3" apply false
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     id("com.google.gms.google-services") version "4.4.3" apply false
     id("org.jetbrains.kotlin.android") version "2.1.0" apply false
 }

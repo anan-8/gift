@@ -1,12 +1,19 @@
 {
   "project_info": {
+<<<<<<< HEAD
     "project_number": "937561498149",
     "project_id": "hadaya-21070",
     "storage_bucket": "hadaya-21070.firebasestorage.app"
+=======
+    "project_number": "283130328937",
+    "project_id": "gift-64824",
+    "storage_bucket": "gift-64824.firebasestorage.app"
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   },
   "client": [
     {
       "client_info": {
+<<<<<<< HEAD
         "mobilesdk_app_id": "1:937561498149:android:eee68bc93828c5f6c015cc",
         "android_client_info": {
           "package_name": "com.example.delegate"
@@ -37,10 +44,14 @@
     {
       "client_info": {
         "mobilesdk_app_id": "1:937561498149:android:f1ba0d1b651734c7c015cc",
+=======
+        "mobilesdk_app_id": "1:283130328937:android:71ca56d1df36d90d19eff8",
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
         "android_client_info": {
           "package_name": "com.example.gift"
         }
       },
+<<<<<<< HEAD
       "oauth_client": [
         {
           "client_id": "937561498149-1aok5i60eh9bp91324t10al1k0nirb64.apps.googleusercontent.com",
@@ -58,10 +69,17 @@
       "api_key": [
         {
           "current_key": "AIzaSyCMdyetEz0LlW8yUUO819E1P4AtsLnQhg0"
+=======
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5MToUDKpCK_Tmu-6yCc9rbfFe2AT4X-I"
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
         }
       ],
       "services": {
         "appinvite_service": {
+<<<<<<< HEAD
           "other_platform_oauth_client": [
             {
               "client_id": "937561498149-7brvqelcvtfguucla6iodve4pgtfnuot.apps.googleusercontent.com",
@@ -97,6 +115,9 @@
               "client_type": 3
             }
           ]
+=======
+          "other_platform_oauth_client": []
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
         }
       }
     }

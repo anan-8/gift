@@ -2,9 +2,15 @@ workflows:
   ios-workflow:
     name: iOS Build Workflow
     environment:
+<<<<<<< HEAD
       flutter: "3.22.2"
       xcode: "15.3"
       cocoapods: "default"
+=======
+      flutter: "3.22.2" # إصدار Flutter (استبدله بإصدارك)
+      xcode: "15.3" # إصدار Xcode
+      cocoapods: "default" # أو حدد إصدارًا معينًا مثل "1.15.2"
+>>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
     triggering:
       events:
         - push

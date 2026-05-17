@@ -27,7 +27,7 @@ jobs:
         run: |
           # أنشئ iPad Pro 12.9 inch (المطلوب من Apple)
           UDID=$(xcrun simctl create "iPadPro129" \
-            "com.apple.CoreSimulator.SimDeviceType.iPad-Pro-12-9-inch-6th-generation" \
+            "com.apple.CoreSimulator.SimDeviceType.iPad-Pro-11-inch-4th-generation" \
             "$(xcrun simctl list runtimes | grep 'iOS' | tail -1 | awk '{print $NF}')")
           echo "SIMULATOR_UDID=$UDID" >> $GITHUB_ENV
           echo "✅ Created simulator: $UDID"
