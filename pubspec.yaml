@@ -27,14 +27,11 @@ dependencies:
   intl: ^0.20.2
   permission_handler: ^11.3.0
   connectivity_plus: ^5.0.2
-<<<<<<< HEAD
   intl_phone_number_input: ^0.7.5
   http: ^1.1.0
   flutter_inappwebview: ^6.0.0
   loading_animation_widget: ^1.3.0
   fluttertoast: ^9.0.0
-=======
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
 
 dev_dependencies:
   flutter_test:
@@ -42,15 +39,9 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_launcher_icons: ^0.13.1
 
-<<<<<<< HEAD
 flutter_launcher_icons:
   android: true
   ios: true
-=======
-flutter_icons:
-  android: true
-  ios: false
->>>>>>> f7a77c2230bd076a0b7d696c96738da0fb2cfe7b
   image_path: "assets/icon/app_icon.png"
 
 flutter:
