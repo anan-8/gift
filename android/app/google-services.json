@@ -1,0 +1,105 @@
+{
+  "project_info": {
+    "project_number": "937561498149",
+    "project_id": "hadaya-21070",
+    "storage_bucket": "hadaya-21070.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937561498149:android:eee68bc93828c5f6c015cc",
+        "android_client_info": {
+          "package_name": "com.example.delegate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937561498149-7brvqelcvtfguucla6iodve4pgtfnuot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMdyetEz0LlW8yUUO819E1P4AtsLnQhg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937561498149-7brvqelcvtfguucla6iodve4pgtfnuot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937561498149:android:f1ba0d1b651734c7c015cc",
+        "android_client_info": {
+          "package_name": "com.example.gift"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937561498149-1aok5i60eh9bp91324t10al1k0nirb64.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gift",
+            "certificate_hash": "ab5bcef82c08dcf9fe183dcedd5402564ee921bc"
+          }
+        },
+        {
+          "client_id": "937561498149-7brvqelcvtfguucla6iodve4pgtfnuot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMdyetEz0LlW8yUUO819E1P4AtsLnQhg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937561498149-7brvqelcvtfguucla6iodve4pgtfnuot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937561498149:android:9bf6b60a084a3c8dc015cc",
+        "android_client_info": {
+          "package_name": "com.example.store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937561498149-7brvqelcvtfguucla6iodve4pgtfnuot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMdyetEz0LlW8yUUO819E1P4AtsLnQhg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937561498149-7brvqelcvtfguucla6iodve4pgtfnuot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,145 @@
+name: iPad Screenshots
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  screenshots:
+    runs-on: macos-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.x"
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Create iPad Pro Simulator
+        run: |
+          # أنشئ iPad Pro 12.9 inch (المطلوب من Apple)
+          UDID=$(xcrun simctl create "iPadPro129" \
+            "com.apple.CoreSimulator.SimDeviceType.iPad-Pro-12-9-inch-6th-generation" \
+            "$(xcrun simctl list runtimes | grep 'iOS' | tail -1 | awk '{print $NF}')")
+          echo "SIMULATOR_UDID=$UDID" >> $GITHUB_ENV
+          echo "✅ Created simulator: $UDID"
+
+      - name: Boot Simulator
+        run: |
+          xcrun simctl boot ${{ env.SIMULATOR_UDID }}
+          # انتظر حتى يكتمل البوت
+          xcrun simctl bootstatus ${{ env.SIMULATOR_UDID }} -b
+          sleep 5
+
+      - name: Build iOS app (Simulator)
+        run: |
+          flutter build ios --simulator --no-codesign
+          echo "✅ Build completed"
+
+      - name: Install app on Simulator
+        run: |
+          APP_PATH=$(find build/ios/iphonesimulator -name "*.app" | head -1)
+          echo "📦 App path: $APP_PATH"
+          xcrun simctl install ${{ env.SIMULATOR_UDID }} "$APP_PATH"
+          echo "✅ App installed"
+
+      - name: Get Bundle ID
+        run: |
+          APP_PATH=$(find build/ios/iphonesimulator -name "*.app" | head -1)
+          BUNDLE_ID=$(/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" "$APP_PATH/Info.plist")
+          echo "BUNDLE_ID=$BUNDLE_ID" >> $GITHUB_ENV
+          echo "📦 Bundle ID: $BUNDLE_ID"
+
+      - name: Create Screenshots Directory
+        run: mkdir -p screenshots
+
+      - name: Launch App
+        run: |
+          xcrun simctl launch ${{ env.SIMULATOR_UDID }} ${{ env.BUNDLE_ID }}
+          sleep 5
+
+      - name: Screenshot - 01 Home Screen
+        run: |
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} screenshot screenshots/01_home_screen.png
+          echo "📸 Home screen captured"
+          sleep 3
+
+      - name: Scroll down on Home Screen
+        run: |
+          # سكرول للأسفل لعرض المزيد من المنتجات
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} swipe 512 900 512 300
+          sleep 2
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} screenshot screenshots/02_home_screen_scrolled.png
+          echo "📸 Home scrolled captured"
+
+      - name: Navigate to Orders Screen
+        run: |
+          # الضغط على تاب الطلبات (الثاني في Bottom Bar)
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} tap 300 1340
+          sleep 3
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} screenshot screenshots/03_orders_screen.png
+          echo "📸 Orders screen captured"
+
+      - name: Navigate to Cart Screen
+        run: |
+          # الضغط على تاب السلة (الثالث)
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} tap 512 1340
+          sleep 3
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} screenshot screenshots/04_cart_screen.png
+          echo "📸 Cart screen captured"
+
+      - name: Navigate to B2B Screen
+        run: |
+          # الضغط على تاب للشركات (الرابع)
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} tap 724 1340
+          sleep 3
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} screenshot screenshots/05_b2b_screen.png
+          echo "📸 B2B screen captured"
+
+      - name: Scroll B2B Screen
+        run: |
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} swipe 512 900 512 300
+          sleep 2
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} screenshot screenshots/06_b2b_screen_scrolled.png
+          echo "📸 B2B scrolled captured"
+
+      - name: Navigate to Settings Screen
+        run: |
+          # الضغط على تاب الإعدادات (الخامس)
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} tap 936 1340
+          sleep 3
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} screenshot screenshots/07_settings_screen.png
+          echo "📸 Settings screen captured"
+
+      - name: Navigate to Login Screen
+        run: |
+          # الضغط على زر تسجيل الدخول
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} tap 512 500
+          sleep 3
+          xcrun simctl io ${{ env.SIMULATOR_UDID }} screenshot screenshots/08_login_screen.png
+          echo "📸 Login screen captured"
+
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ipad-screenshots-${{ github.run_number }}
+          path: screenshots/
+          retention-days: 30
+
+      - name: Summary
+        run: |
+          echo "## 📸 Screenshots Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          COUNT=$(ls screenshots/*.png 2>/dev/null | wc -l)
+          echo "✅ Captured $COUNT screenshots" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          ls screenshots/*.png >> $GITHUB_STEP_SUMMARY
