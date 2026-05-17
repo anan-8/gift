@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:app_settings/app_settings.dart';
 
 class CheckoutScreen extends StatefulWidget {
   @override
@@ -47,7 +46,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                AppSettings.openAppSettings();
                 Navigator.of(context).pop();
               },
               child: Text('فتح الإعدادات'),
